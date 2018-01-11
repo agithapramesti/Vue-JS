@@ -2,6 +2,8 @@
   <div>
     <h1>Hey Let's learn Api</h1>
     <button @click="callApi">Call Api</button>
+    <button @click="incrementQue">Tombol Increment</button>
+    {{count}}
     <ul>
       <li v-for="film in films" :key="film.id">
         {{film.title}}
@@ -12,6 +14,7 @@
 
 <script>
   import axios from 'axios'
+  import {mapGetters} from 'vuex'
 
   export default{
     name: 'LearnApl',
@@ -19,6 +22,9 @@
       return {
         films:[]
       }
+    },
+    computed:{
+      ...mapGetters(['count'])
     },
     methods:{
       callApi(){
@@ -32,6 +38,9 @@
           console.log(error)
         })
         console.log('call api with ', axios)
+      },
+      incrementQue(){
+        this.$store.dispatch('increment')
       }
     }
   }
